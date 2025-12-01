@@ -31,7 +31,7 @@ public class Game extends JFrame {
 	/**
 	 * The number of frame per second the game should run at.
 	 */
-	private static final int FRAMES_PER_SECOND = 60;
+	private static final int FRAMES_PER_SECONDS = 60; // TODO: THIS LINE OF CODE HAS BEEN CHANGED (REMOVE S)
 	
 	/**
 	 * The number of nanoseconds that should elapse each frame. This is far more
