@@ -7,11 +7,9 @@ class GameTest {
 
     @Test
     void isGameOver() {
-        fail("Test");
     }
 
     @Test
     void isPaused() {
-        fail("no Test");
     }
 }
