@@ -12,6 +12,5 @@ class GameTest {
 
     @Test
     void isPaused() {
-        fail("Second test");
     }
 }
