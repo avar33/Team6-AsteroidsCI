@@ -233,6 +233,8 @@ public class Game extends JFrame {
 					
 	// 			}
 	// 		}
+
+	yadayada lirili larila big pants ok posole 6 7 oh hell no bread pan hehehehehe pollo tamales for christmas only
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
