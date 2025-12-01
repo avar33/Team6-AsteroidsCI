@@ -37,202 +37,202 @@ public class Game extends JFrame {
 	 * The number of nanoseconds that should elapse each frame. This is far more
 	 * accurate than using milliseconds.
 	 */
-	private static final long FRAME_TIME = (long)(1000000000.0 / FRAMES_PER_SECOND);
+	// private static final long FRAME_TIME = (long)(1000000000.0 / FRAMES_PER_SECOND);
 	
-	/**
-	 * The number of frames that the "current level" message appears for.
-	 */
-	private static final int DISPLAY_LEVEL_LIMIT = 60;
+	// /**
+	//  * The number of frames that the "current level" message appears for.
+	//  */
+	// private static final int DISPLAY_LEVEL_LIMIT = 60;
 	
-	/**
-	 * The value that {@code deathCooldown} will be set to upon player death.
-	 */
-	private static final int DEATH_COOLDOWN_LIMIT = 200;
+	// /**
+	//  * The value that {@code deathCooldown} will be set to upon player death.
+	//  */
+	// private static final int DEATH_COOLDOWN_LIMIT = 200;
 	
-	/**
-	 * The value for {@code deathCooldown} that the Player respawns.
-	 */
-	private static final int RESPAWN_COOLDOWN_LIMIT = 100;
+	// /**
+	//  * The value for {@code deathCooldown} that the Player respawns.
+	//  */
+	// private static final int RESPAWN_COOLDOWN_LIMIT = 100;
 	
-	/**
-	 * The value for {@code deathCooldown} that the player becomes vulnerable,
-	 * and regains the ability to fire.
-	 */
-	private static final int INVULN_COOLDOWN_LIMIT = 0;
+	// /**
+	//  * The value for {@code deathCooldown} that the player becomes vulnerable,
+	//  * and regains the ability to fire.
+	//  */
+	// private static final int INVULN_COOLDOWN_LIMIT = 0;
 	
-	/**
-	 * The value that {@code resetCooldown} is set to when the player loses.
-	 */
-	private static final int RESET_COOLDOWN_LIMIT = 120;
+	// /**
+	//  * The value that {@code resetCooldown} is set to when the player loses.
+	//  */
+	// private static final int RESET_COOLDOWN_LIMIT = 120;
 		
-	/**
-	 * The WorldPanel instance.
-	 */
-	private WorldPanel world;
+	// /**
+	//  * The WorldPanel instance.
+	//  */
+	// private WorldPanel world;
 	
-	/**
-	 * The Clock instance for handling the game updates.
-	 */
-	private Clock logicTimer;
+	// /**
+	//  * The Clock instance for handling the game updates.
+	//  */
+	// private Clock logicTimer;
 	
-	/**
-	 * The Random instance for spawning entities.
-	 */
-	private Random random;
+	// /**
+	//  * The Random instance for spawning entities.
+	//  */
+	// private Random random;
 	
-	/**
-	 * The list of Entity objects that exist in the game world.
-	 */
-	private List<Entity> entities;
+	// /**
+	//  * The list of Entity objects that exist in the game world.
+	//  */
+	// private List<Entity> entities;
 	
-	/**
-	 * The list of Entity objects that need to be added to the game world.
-	 */
-	private List<Entity> pendingEntities;
+	// /**
+	//  * The list of Entity objects that need to be added to the game world.
+	//  */
+	// private List<Entity> pendingEntities;
 		
-	/**
-	 * The Player instance.
-	 */
-	private Player player;
+	// /**
+	//  * The Player instance.
+	//  */
+	// private Player player;
 	
-	/**
-	 * <p>The death cooldown timer is responsible for spreading a Player's death
-	 * out over time, so the player does not instantly spawn.</p>
-	 * 
-	 * <p>Upon death, this value is set to {@code DEATH_COOLDOWN_LIMIT}, and is
-	 * decremented each frame.</p>
-	 * 
-	 * <p>Once the value reaches {@code RESPAWN_COOLDOWN_LIMIT}, the player's ship
-	 * will be reset and the player will regain the ability to move.</p>
-	 * 
-	 * <p>Once the value reaches {@code INVULN_COOLDOWN_LIMIT}, the Player's ship
-	 * will be vulnerable to collisions and the Player will regain the ability to
-	 * shoot.</p>
-	 */
-	private int deathCooldown;
+	// /**
+	//  * <p>The death cooldown timer is responsible for spreading a Player's death
+	//  * out over time, so the player does not instantly spawn.</p>
+	//  * 
+	//  * <p>Upon death, this value is set to {@code DEATH_COOLDOWN_LIMIT}, and is
+	//  * decremented each frame.</p>
+	//  * 
+	//  * <p>Once the value reaches {@code RESPAWN_COOLDOWN_LIMIT}, the player's ship
+	//  * will be reset and the player will regain the ability to move.</p>
+	//  * 
+	//  * <p>Once the value reaches {@code INVULN_COOLDOWN_LIMIT}, the Player's ship
+	//  * will be vulnerable to collisions and the Player will regain the ability to
+	//  * shoot.</p>
+	//  */
+	// private int deathCooldown;
 	
-	/**
-	 * <p>The show level cooldown timer is responsible for displaying the current
-	 * level briefly after the previous level has been completed.</p>
-	 */
-	private int showLevelCooldown;
+	// /**
+	//  * <p>The show level cooldown timer is responsible for displaying the current
+	//  * level briefly after the previous level has been completed.</p>
+	//  */
+	// private int showLevelCooldown;
 	
-	/**
-	 * <p>The reset cooldown prevents the game from instantly restarting if the
-	 * player is pressing any keys upon death, as key events are continuously
-	 * fired until the player lets go of the key.</p>
-	 * 
-	 * <p>This timer adds a short delay that must expire before the game can
-	 * be reset, giving the player time to react.</p>
-	 */
-	private int restartCooldown;
+	// /**
+	//  * <p>The reset cooldown prevents the game from instantly restarting if the
+	//  * player is pressing any keys upon death, as key events are continuously
+	//  * fired until the player lets go of the key.</p>
+	//  * 
+	//  * <p>This timer adds a short delay that must expire before the game can
+	//  * be reset, giving the player time to react.</p>
+	//  */
+	// private int restartCooldown;
 	
-	/**
-	 * The current score.
-	 */
-	private int score;
+	// /**
+	//  * The current score.
+	//  */
+	// private int score;
 	
-	/**
-	 * The number of lives the Player has left.
-	 */
-	private int lives;
+	// /**
+	//  * The number of lives the Player has left.
+	//  */
+	// private int lives;
 	
-	/**
-	 * The current level the player is on.
-	 */
-	private int level;
+	// /**
+	//  * The current level the player is on.
+	//  */
+	// private int level;
 	
-	/**
-	 * Whether or not the game is over.
-	 */
-	private boolean isGameOver;
+	// /**
+	//  * Whether or not the game is over.
+	//  */
+	// private boolean isGameOver;
 	
-	/**
-	 * Whether or not the player has pressed anything to restart the game.
-	 */
-	private boolean restartGame;
+	// /**
+	//  * Whether or not the player has pressed anything to restart the game.
+	//  */
+	// private boolean restartGame;
 	
-	/**
-	 * Create a new instance of the Game.
-	 */
-	private Game() {
-		//Initialize the window's basic properties.
-		super("Asteroids");
-		setLayout(new BorderLayout());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+	// /**
+	//  * Create a new instance of the Game.
+	//  */
+	// private Game() {
+	// 	//Initialize the window's basic properties.
+	// 	super("Asteroids");
+	// 	setLayout(new BorderLayout());
+	// 	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	// 	setResizable(false);
 		
-		//Create and add the WorldPanel instance to the window.
-		add(this.world = new WorldPanel(this), BorderLayout.CENTER);
+	// 	//Create and add the WorldPanel instance to the window.
+	// 	add(this.world = new WorldPanel(this), BorderLayout.CENTER);
 		
-		/*
-		 * Here we add a key listener to the window so that we can process incoming
-		 * user input.
-		 * 
-		 * Because the player is updated every cycle, rather than when it receives
-		 * input (like I did for Tetris), we're only going to set a flag to indicate
-		 * the current input state. The actual change in the player's entity's state
-		 * will be handled in the game loop.
-		 * 
-		 * The reason we do this is simple. Events are only fired when input is received
-		 * from the user. While the keyPressed event is continuously fired, it isn't
-		 * necessarily going to be in sync with our main thread, which would cause
-		 * all sorts of unpredictable behavior from our ship.
-		 * 
-		 * Note that any "pressed" event will restart the game rather than change the
-		 * ship's state if the conditions are met.
-		 */
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				//Determine which key was pressed.
-				switch(e.getKeyCode()) {
+	// 	/*
+	// 	 * Here we add a key listener to the window so that we can process incoming
+	// 	 * user input.
+	// 	 * 
+	// 	 * Because the player is updated every cycle, rather than when it receives
+	// 	 * input (like I did for Tetris), we're only going to set a flag to indicate
+	// 	 * the current input state. The actual change in the player's entity's state
+	// 	 * will be handled in the game loop.
+	// 	 * 
+	// 	 * The reason we do this is simple. Events are only fired when input is received
+	// 	 * from the user. While the keyPressed event is continuously fired, it isn't
+	// 	 * necessarily going to be in sync with our main thread, which would cause
+	// 	 * all sorts of unpredictable behavior from our ship.
+	// 	 * 
+	// 	 * Note that any "pressed" event will restart the game rather than change the
+	// 	 * ship's state if the conditions are met.
+	// 	 */
+	// 	addKeyListener(new KeyAdapter() {
+	// 		@Override
+	// 		public void keyPressed(KeyEvent e) {
+	// 			//Determine which key was pressed.
+	// 			switch(e.getKeyCode()) {
 				
-				//Indicate that we want to apply thrust to our ship.
-				case KeyEvent.VK_W:
-				case KeyEvent.VK_UP:
-					if(!checkForRestart()) {
-						player.setThrusting(true);
-					}
-					break;
+	// 			//Indicate that we want to apply thrust to our ship.
+	// 			case KeyEvent.VK_W:
+	// 			case KeyEvent.VK_UP:
+	// 				if(!checkForRestart()) {
+	// 					player.setThrusting(true);
+	// 				}
+	// 				break;
 					
-				//Indicate that we want to rotate our ship to the left.
-				case KeyEvent.VK_A:
-				case KeyEvent.VK_LEFT:
-					if(!checkForRestart()) {
-						player.setRotateLeft(true);
-					}
-					break;
+	// 			//Indicate that we want to rotate our ship to the left.
+	// 			case KeyEvent.VK_A:
+	// 			case KeyEvent.VK_LEFT:
+	// 				if(!checkForRestart()) {
+	// 					player.setRotateLeft(true);
+	// 				}
+	// 				break;
 					
-				//Indicate that we want to rotate our ship to the right.
-				case KeyEvent.VK_D:
-				case KeyEvent.VK_RIGHT:
-					if(!checkForRestart()) {
-						player.setRotateRight(true);
-					}
-					break;
+	// 			//Indicate that we want to rotate our ship to the right.
+	// 			case KeyEvent.VK_D:
+	// 			case KeyEvent.VK_RIGHT:
+	// 				if(!checkForRestart()) {
+	// 					player.setRotateRight(true);
+	// 				}
+	// 				break;
 					
-				//Indicate that we want our ship to fire bullets.
-				case KeyEvent.VK_SPACE:
-					if(!checkForRestart()) {
-						player.setFiring(true);
-					}
-					break;
+	// 			//Indicate that we want our ship to fire bullets.
+	// 			case KeyEvent.VK_SPACE:
+	// 				if(!checkForRestart()) {
+	// 					player.setFiring(true);
+	// 				}
+	// 				break;
 					
-				//Indicate that we want to pause the game.
-				case KeyEvent.VK_P:
-					if(!checkForRestart()) {
-						logicTimer.setPaused(!logicTimer.isPaused());
-					}
-					break;
+	// 			//Indicate that we want to pause the game.
+	// 			case KeyEvent.VK_P:
+	// 				if(!checkForRestart()) {
+	// 					logicTimer.setPaused(!logicTimer.isPaused());
+	// 				}
+	// 				break;
 					
-				//Handle all other key presses.
-				default:
-					checkForRestart();
-					break;
+	// 			//Handle all other key presses.
+	// 			default:
+	// 				checkForRestart();
+	// 				break;
 					
-				}
-			}
+	// 			}
+	// 		}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
