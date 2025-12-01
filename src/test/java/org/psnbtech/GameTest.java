@@ -7,7 +7,7 @@ class GameTest {
 
     @Test
     void isGameOver() {
-        //fail("Test");
+        fail("Test");
     }
 
     @Test
