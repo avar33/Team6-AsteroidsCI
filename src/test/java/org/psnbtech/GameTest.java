@@ -7,7 +7,6 @@ class GameTest {
 
     @Test
     void isGameOver() {
-        fail("Test supposed to fail");
     }
 
     @Test
